@@ -1,35 +1,23 @@
 #!/usr/bin/python3
-"""min operation function"""
-from math import sqrt
+"""
+Minimum Operations
+"""
 
 
 def minOperations(n):
-    """get min operations needed to get n number
-    H when you can only copy and paste"""
+    """
+    Calculates the minimum number of operations needed to result in exactly n H characters
+    """
     if n <= 1:
         return 0
-    elif is_prime(n):
-        return n
-    else:
-        prime = small_prime(n)
-        if prime:
-            return prime + minOperations(int(n/prime))
 
+    operations = 0
+    divisor = 2
 
-def is_prime(n):
-    """check if a number is prime"""
-    result = True
-    for i in range(2, int(sqrt(n)) + 1):
-        if n % i == 0:
-            result = False
-    return result
+    while n > 1:
+        while n % divisor == 0:
+            operations += divisor
+            n //= divisor
+        divisor += 1
 
-
-def small_prime(n):
-    """get the smallest prime factor"""
-    result = None
-    for i in range(2, int(n/2 + 1)):
-        if n % i == 0:
-            result = i
-            break
-    return result
+    return operations
